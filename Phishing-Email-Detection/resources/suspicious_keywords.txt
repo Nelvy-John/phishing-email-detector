@@ -1,0 +1,150 @@
+verify your account
+verify account immediately
+account suspended
+account locked
+account restricted
+unusual activity detected
+security alert
+confirm your identity
+identity verification required
+click here immediately
+urgent action required
+act now
+limited time offer
+final notice
+important notice
+your account will be closed
+restore access
+reset your password
+reset password immediately
+update payment information
+update billing details
+billing problem
+payment required
+overdue payment
+failed payment
+card declined
+credit card problem
+bank verification
+confirm bank details
+unauthorized login attempt
+new device detected
+sign in to continue
+session expired
+re authenticate
+secure your account
+confirm ownership
+verify ownership
+suspicious login
+login from new location
+we noticed suspicious activity
+your mailbox is full
+email quota exceeded
+upgrade mailbox
+reactivate your email
+email deactivation warning
+verify your email
+reconfirm email address
+click the link below
+open attachment immediately
+download document
+review attached invoice
+invoice attached
+pending invoice
+receipt attached
+payment receipt
+tax refund available
+irs refund
+government refund
+you are eligible for refund
+claim your refund
+unexpected refund
+wire transfer required
+send money now
+urgent transfer
+bitcoin payment
+crypto payment required
+gift card payment
+purchase gift cards
+inheritance fund
+beneficiary notification
+estate claim
+lottery winner
+you have won
+congratulations winner
+claim your prize
+free reward
+exclusive reward
+cash reward
+prize awaiting
+urgent prize claim
+delivery problem
+package on hold
+failed delivery attempt
+confirm shipping address
+reschedule delivery
+tracking suspended
+customs clearance
+dhl notice
+fedex alert
+ups delivery
+amazon order problem
+amazon refund
+paypal limitation
+paypal account restricted
+apple id locked
+icloud locked
+microsoft account compromised
+google security alert
+facebook account blocked
+instagram verification required
+whatsapp account suspended
+linkedin security alert
+zoom meeting alert
+dropbox storage full
+onedrive full
+icloud storage full
+shared document
+secure document
+confidential document
+protected file
+encrypted message
+voice message attached
+missed voicemail
+new voicemail
+fax received
+scanned document
+secure message center
+urgent message
+important message
+action needed
+time sensitive
+do not ignore
+respond immediately
+verify now
+act fast
+last chance
+immediate response required
+limited access
+temporary suspension
+restore immediately
+failure to comply
+legal action pending
+court notice
+subpoena attached
+tax violation
+account investigation
+fraud investigation
+identity theft alert
+compromised credentials
+security breach
+data breach notification
+confirm credentials
+login verification
+confirm login
+reset credentials
+validate account
+revalidate account
+activate account
+unlock account
+reactivate now

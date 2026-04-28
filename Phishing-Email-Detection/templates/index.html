@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Phishing Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+        }
+
+        .logo {
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 12px;
+            font-size: 24px;
+        }
+
+        .btn-logs {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-logs:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-card {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 10px;
+        }
+
+        .card-subtitle {
+            color: #718096;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4a5568;
+            font-weight: 600;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            resize: vertical;
+            transition: all 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-analyze {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 40px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-analyze:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-analyze:active {
+            transform: translateY(0);
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-top: 30px;
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .result-icon {
+            font-size: 48px;
+        }
+
+        .result-text h2 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .result-text p {
+            color: #718096;
+            font-size: 16px;
+        }
+
+        .result-phishing {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .result-phishing .result-text p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .result-safe {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .result-safe .result-text p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .confidence-bar {
+            margin: 25px 0;
+        }
+
+        .confidence-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            transition: width 0.8s ease;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .detail-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 16px;
+        }
+
+        .detail-box h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            opacity: 0.9;
+        }
+
+        .detail-box ul {
+            list-style: none;
+        }
+
+        .detail-box li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-box li:last-child {
+            border-bottom: none;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <span class="logo-icon">🛡️</span>
+                <span>Phishing Detector AI</span>
+            </div>
+            <a href="/logs" class="btn-logs">📊 View History</a>
+        </div>
+
+        <div class="main-card">
+            <h1 class="card-title">Analyze Email for Threats</h1>
+            <p class="card-subtitle">Paste suspicious email content below to check if it's a phishing attempt</p>
+
+            <form method="POST">
+                <div class="form-group">
+                    <label for="email_text">Email Content</label>
+                    <textarea id="email_text" name="email_text"
+                        placeholder="Paste the email content here...">{{email}}</textarea>
+                </div>
+                <button type="submit" class="btn-analyze">🔍 Analyze Email</button>
+            </form>
+        </div>
+
+        {% if result %}
+        <div class="result-card {% if 'ALERT' in result %}result-phishing{% else %}result-safe{% endif %}">
+            <div class="result-header">
+                <div class="result-icon">
+                    {% if 'ALERT' in result %}
+                    ⚠️
+                    {% else %}
+                    ✅
+                    {% endif %}
+                </div>
+                <div class="result-text">
+                    <h2>{{ result }}</h2>
+                    <p>AI Model Confidence Level</p>
+                </div>
+            </div>
+
+            <div class="confidence-bar">
+                <div class="confidence-label">
+                    <span>Confidence Score</span>
+                    <span>{{ confidence }}%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: {{ confidence }}%"></div>
+                </div>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-box">
+                    <h3>🔗 Detected URLs ({{ urls|length }})</h3>
+                    {% if urls %}
+                    <ul>
+                        {% for u in urls %}
+                        <li>{{ u }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p class="empty-state">No URLs detected</p>
+                    {% endif %}
+                </div>
+
+                <div class="detail-box">
+                    <h3>🚨 Suspicious Keywords ({{ words|length }})</h3>
+                    {% if words %}
+                    <ul>
+                        {% for w in words %}
+                        <li>{{ w }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p class="empty-state">No suspicious keywords found</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>

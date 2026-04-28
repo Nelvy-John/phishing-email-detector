@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detection History - AI Phishing Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+        }
+
+        .logo {
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 12px;
+            font-size: 24px;
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .page-title {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .page-title h1 {
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+
+        .page-title p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+
+        .table-card {
+            background: white;
+            border-radius: 24px;
+            padding: 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 30px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .table-header h2 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .table-header p {
+            opacity: 0.9;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead th {
+            background: #f7fafc;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tbody td {
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #2d3748;
+        }
+
+        tbody tr {
+            transition: background 0.2s;
+        }
+
+        tbody tr:hover {
+            background: #f7fafc;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .log-id {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .timestamp {
+            font-size: 14px;
+            color: #718096;
+        }
+
+        .email-preview {
+            max-width: 350px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+
+        .result-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .badge-alert {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .badge-safe {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .confidence {
+            font-weight: 600;
+        }
+
+        .confidence-high {
+            color: #48bb78;
+        }
+
+        .confidence-medium {
+            color: #ed8936;
+        }
+
+        .confidence-low {
+            color: #f56565;
+        }
+
+        .no-logs {
+            text-align: center;
+            padding: 80px 40px;
+            color: #718096;
+        }
+
+        .no-logs-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .no-logs h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #2d3748;
+        }
+
+        .no-logs p {
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .table-header,
+            thead th,
+            tbody td {
+                padding: 15px;
+            }
+
+            .email-preview {
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <span class="logo-icon">🛡️</span>
+                <span>Phishing Detector AI</span>
+            </div>
+            <a href="/" class="btn-back">← Back to Detector</a>
+        </div>
+
+        <div class="page-title">
+            <h1>📊 Detection History</h1>
+            <p>View all your recent email analysis results</p>
+        </div>
+
+        <div class="table-card">
+            {% if logs %}
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Timestamp</th>
+                            <th>Email Preview</th>
+                            <th>Result</th>
+                            <th>Confidence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for log in logs %}
+                        <tr>
+                            <td class="log-id">#{{ log.id }}</td>
+                            <td class="timestamp">
+                                {{ log.timestamp.strftime('%b %d, %Y at %I:%M %p') if log.timestamp else 'N/A' }}
+                            </td>
+                            <td class="email-preview" title="{{ log.email_text }}">
+                                {{ log.email_text[:60] }}{% if log.email_text|length > 60 %}...{% endif %}
+                            </td>
+                            <td>
+                                <span
+                                    class="result-badge {% if 'ALERT' in log.result %}badge-alert{% else %}badge-safe{% endif %}">
+                                    {% if 'ALERT' in log.result %}
+                                    ⚠️ {{ log.result }}
+                                    {% else %}
+                                    ✅ {{ log.result }}
+                                    {% endif %}
+                                </span>
+                            </td>
+                            <td
+                                class="confidence {% if log.confidence >= 80 %}confidence-high{% elif log.confidence >= 60 %}confidence-medium{% else %}confidence-low{% endif %}">
+                                {{ log.confidence }}%
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="no-logs">
+                <div class="no-logs-icon">📭</div>
+                <h3>No Detection History Yet</h3>
+                <p>Start analyzing emails to see your results here</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>
