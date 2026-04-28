@@ -6,8 +6,8 @@ def get_connection():
     try:
         connection = mysql.connector.connect(
             host="localhost",
-            user="root",
-            password="root",
+            user="your_username",
+            password="your_password",
             database="phishing_db"
         )
         if connection.is_connected():
